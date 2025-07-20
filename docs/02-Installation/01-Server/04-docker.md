@@ -1,6 +1,6 @@
 ---
-title: 🐳 Docker
-description: How to deploy OpenUEM server components using Docker
+title: 🐳 Docker / Podman
+description: How to deploy OpenUEM server components using Docker / Podman
 keywords:
   [
     IT assets,
@@ -11,19 +11,21 @@ keywords:
     unified endpoint manager,
     remote monitoring and management,
     docker,
+    podman,
   ]
 ---
 
-# 🐳 Docker
+# 🐳 Docker / Podman
 
-OpenUEM can be tested using Docker containers that are hosted in [Docker Hub](https://hub.docker.com/u/openuem)
+OpenUEM can be run using Docker/Podman containers that are hosted on [Docker Hub](https://hub.docker.com/u/openuem)
 
-You can use [docker compose](https://docs.docker.com/compose/) to install all OpenUEM components in a single machine
-following these steps:
+You can use [docker compose](https://docs.docker.com/compose/)
+or [podman compose](https://github.com/containers/podman-compose) to install and run all OpenUEM components on a single
+machine following these steps:
 
-## 1. Get the docker-compose file
+## 1. Get the compose file
 
-Clone the openuem-docker repository:
+Clone the `openuem-docker` repository:
 
 ```(bash)
 git clone https://github.com/open-uem/openuem-docker
@@ -34,15 +36,14 @@ git clone https://github.com/open-uem/openuem-docker
 Use the file named `.env-example` file to create a `.env` file
 
 :::note
-The file must be named .env without extension and with a dot before the env word as required by Docker to read the
+The file must be named `.env` without extension and with a dot before the env word as required by Docker to read the
 environment variables
 :::
 
 In the `.env` file, edit the environment variables that docker compose will use to build and get the containers up and
 running. The `.env-example` you just copied already sets up a working demo instance of OpenUEM on the `openuem.example`
-domain. If you
-want to simply try out OpenUEM you can just use it as-is. If you want to setup a production system or use your own
-domain and information, you can customize the `.env` just created.
+domain. If you want to simply try out OpenUEM you can just use it as-is. If you want to setup a production system or use
+your own domain and information, you can customize the `.env` you just created.
 
 :::danger
 It's strongly recommended to change the JWT key with a random 32 characters long string
@@ -86,7 +87,7 @@ DNS, you can override your devices `hosts` configuration and allow local domain 
 - On Windows: the configuration can be found under `C:\Windows\System32\drivers\etc\hosts`. Add the line
   `{YOUR_LOCAL_IP} *.{OPENUEM_DOMAIN}`
 
-You have to replace `{YOUR_LOCAL_IP}` and `{OPENUEM_DOMAIN}` with their respective values. It is **important** that you
+You have to replace `{YOUR_LOCAL_IP}` and `{OPENUEM_DOMAIN}` with their respective values set in the `.env` file. It is **important** that you
 use your **local ip address** (e.g. 192.168.1.43) **instead** of localhost or 127.0.0.1. Docker will copy these
 overrides into the containers on start. If you use localhost, each container will only try to connect to itself, making
 proper domain resolution impossible.
@@ -103,17 +104,19 @@ table above). Remember that the hosts / domains you set have to be resolvable by
 
 ## 4. Launch docker compose command
 
-Where the compose.yaml file and the .env files are located, launch OpenUEM with the following commands:
+Where the `compose.yaml` file and the .env files are located, launch OpenUEM with the following commands:
 
 Without Caddy support:
 
 ```bash
-docker compose -d --build
+# Docker Compose:
+docker compose up -d --build 
 ```
 
 With Caddy support:
 
-```(bash)
+```bash
+# Docker Compose:
 docker compose -f compose-caddy.yml up -d --build
 ```
 
@@ -124,14 +127,13 @@ On first start all the certificates are generated in the certificates folder:
 :::warning
 The generation of certificates can take some time, don't stop the containers or go to the next step until you check that
 certificates have been indeed created. This should be automatically done when the `... compose up ...` command finishes.
-If you find two files under the agents folder and one pfx file inside the users folder, you're good to go.
-:::
-
-:::warning
-If you find any error trying to launch the services, run the docker compose down commands shown below, **remove the
+If you find two files under the `agents` folder and one `.pfx` file inside the `users` folder, you're good to go.
+ 
+If you find any error trying to launch the services, run the `docker compose down` or `podman compose down` commands shown below, **remove the
 volumes and the certificates folder** and start again
 
 If you don't use Caddy:
+
 ```bash
 docker compose down
 sudo rm -rf certificates
@@ -139,6 +141,7 @@ docker volume rm openuem_jetstream openuem_pgdata
 ```
 
 And if you use the Caddy option:
+
 ```bash
 docker compose -f compose-caddy.yml down
 sudo rm -rf certificates
@@ -148,17 +151,18 @@ docker volume rm openuem_jetstream openuem_pgdata openuem_caddy_config openuem_c
 Open an issue with all the possible information if you can't start OpenUEM with Docker
 :::
 
-
 ## 5. Stopping OpenUEM
 
 If we want to stop OpenUEM we should run the following commands:
 
 Without Caddy support:
+
 ```(bash)
 docker compose down
 ```
 
 With Caddy support:
+
 ```(bash)
 docker compose -f compose-caddy.yml down
 ```
@@ -166,10 +170,10 @@ docker compose -f compose-caddy.yml down
 ## 6. Trust in digital certificates created
 
 Before we can visit OpenUEM's console, we must import two digital certificates to our browser, the Certificate Authority
-certificate (ca.cer) and the user's certificate to log in. You have a guide explaining how to import
+certificate (`ca.cer`) and the user's certificate to log in. You have a guide explaining how to import
 certificates [here](/docs/Advanced%20Topics/user-certificate)
 
-Next to the compose .yaml file you’ll find a **certificates folder** containing all the certificates that OpenUEM has
+Next to the `compose.yaml` file you’ll find a **certificates folder** containing all the certificates that OpenUEM has
 created and that are [required to run](/docs/Introduction/security).
 
 ## 7. Visit OpenUEM's Console
@@ -193,6 +197,7 @@ stores of your browser
 ## 8. Update
 
 To update the Docker containers, use docker compose without the Caddy option:
+
 ```(bash)
 docker compose up --force-recreate -d --build --pull
 ```
@@ -213,5 +218,5 @@ to log-in. You can import the certificates following [these steps](/docs/Advance
 ### 9.2. Why I see messages like _read certificates/console.cer: is a directory_ in docker logs?
 
 That means that certificates were not generated in the initial phase, most probably there's a connection issue with the
-database container or wrong credentials have been used. Database credentials must match between the DATABASE_URL
-variable set in the .env file and the file build/postgres/init.sh file.
+database container or wrong credentials have been used. Database credentials must match between the `DATABASE_URL`
+variable set in the `.env` file and the file `build/postgres/init.sh` file.
