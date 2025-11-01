@@ -51,6 +51,10 @@ It's strongly recommended to change the JWT key with a random 32 characters long
 
 Here are the possible environment variables that can appear in the .env file.
 
+:::warning
+The variables prefixed with `DATABASE` are used to create a Postgres connection URI string. Note that the connection URI needs to be encoded with percent-encoding if it includes symbols with special meaning in any of its parts as mentioned in [Postgres docs](https://www.postgresql.org/docs/17/libpq-connect.html#LIBPQ-CONNSTRING). If you use special characters in your username or password, you may find the [following page](https://www.w3schools.com/tags/ref_urlencode.ASP) of interest to encode the value set to the variable. For example if your password is te=st you should use the following value te%3Dst to replace the = sign.   
+:::
+
 | Name                       | Description                                                                                                                         | Required | Example value                                                     |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------|
 | DATABASE_DB_NAME           | Name of the postgres database used (will be created automatically on first start)                                                   | yes      | openuem                                                           |
@@ -78,14 +82,14 @@ Here are the possible environment variables that can appear in the .env file.
 | CONSOLE_AUTH_PORT          | The port used by the auth server                                                                                                    | yes      | 1324                                                              |
 | CONSOLE_JWT_KEY            | The key used to encrypt JWT tokens for user registration                                                                            | yes      | averylongsecret                                                   |
 | OPENUEM_NATS_SERVERS       | List of all NATS servers that will be used by many OpenUEM components. Normally this will be $NATS_HOST:$NATS_PORT                  | yes      | nats.openuem.example:4433                                         |
+| RE_ENABLE_CERTIFICATES_AUTH | If you want to re-enable the use of certificates to log in | no | true or false |
 
 It is possible to only use one domain for all services, but `CONSOLE_HOST`, `OPENUEM_NATS_SERVERS` and `NATS_HOST`
 should be resolved by your DNS service. If you are just locally deploying a demo instance and don't have access to a
 DNS, you can override your devices `hosts` configuration and allow local domain resolution.
 
-- On Linux: this configuration can be found under `/etc/hosts`. Add the line `{YOUR_LOCAL_IP} *.{OPENUEM_DOMAIN}`
-- On Windows: the configuration can be found under `C:\Windows\System32\drivers\etc\hosts`. Add the line
-  `{YOUR_LOCAL_IP} *.{OPENUEM_DOMAIN}`
+- On Linux: this configuration can be found under `/etc/hosts`. Add the line `{YOUR_LOCAL_IP} {NATS_HOST} {OCSP_HOST} {CONSOLE_HOST}`
+- On Windows: the configuration can be found under `C:\Windows\System32\drivers\etc\hosts`. Add the line `{YOUR_LOCAL_IP} {NATS_HOST} {OCSP_HOST} {CONSOLE_HOST}`
 
 You have to replace `{YOUR_LOCAL_IP}` and `{OPENUEM_DOMAIN}` with their respective values set in the `.env` file. It is **important** that you
 use your **local ip address** (e.g. 192.168.1.43) **instead** of localhost or 127.0.0.1. Docker will copy these
