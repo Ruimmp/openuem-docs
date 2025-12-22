@@ -23,6 +23,10 @@ You can use [docker compose](https://docs.docker.com/compose/)
 or [podman compose](https://github.com/containers/podman-compose) to install and run all OpenUEM components on a single
 machine following these steps:
 
+:::danger
+For deployments carried out before December 22, 2025, breaking changes are introduced. Please go to the [Legacy](/docs/Installation/Server/docker#9-legacy-docker-compose) section in this document to know how you can migrate from the older docker compose file.
+:::
+
 ## 1. Get the compose file
 
 Clone the `openuem-docker` repository:
@@ -83,6 +87,8 @@ The variables prefixed with `DATABASE` are used to create a Postgres connection 
 | CONSOLE_JWT_KEY            | The key used to encrypt JWT tokens for user registration                                                                            | yes      | averylongsecret                                                   |
 | OPENUEM_NATS_SERVERS       | List of all NATS servers that will be used by many OpenUEM components. Normally this will be $NATS_HOST:$NATS_PORT                  | yes      | nats.openuem.example:4433                                         |
 | RE_ENABLE_CERTIFICATES_AUTH | If you want to re-enable the use of certificates to log in | no | true or false |
+| RE_ENABLE_PASSWD_AUTH | If you want to re-enable the use of username and passwords to log in | no | true or false |
+| RESET_OPENUEM_USER | If you want to reset the openuem user to get a new password | no | true or false |
 
 It is possible to only use one domain for all services, but `CONSOLE_HOST`, `OPENUEM_NATS_SERVERS` and `NATS_HOST`
 should be resolved by your DNS service. If you are just locally deploying a demo instance and don't have access to a
@@ -90,6 +96,7 @@ DNS, you can override your devices `hosts` configuration and allow local domain 
 
 - On Linux: this configuration can be found under `/etc/hosts`. Add the line `{YOUR_LOCAL_IP} {NATS_HOST} {OCSP_HOST} {CONSOLE_HOST}`
 - On Windows: the configuration can be found under `C:\Windows\System32\drivers\etc\hosts`. Add the line `{YOUR_LOCAL_IP} {NATS_HOST} {OCSP_HOST} {CONSOLE_HOST}`
+- On macOS: the configuration can be found under /private/etc/hosts
 
 You have to replace `{YOUR_LOCAL_IP}` and `{OPENUEM_DOMAIN}` with their respective values set in the `.env` file. It is **important** that you
 use your **local ip address** (e.g. 192.168.1.43) **instead** of localhost or 127.0.0.1. Docker will copy these
@@ -212,14 +219,72 @@ And if you use the Caddy option:
 docker compose up --force-recreate -d  --pull
 ```
 
-## 9. Troubleshooting and FAQ
+## 9. Legacy docker compose
 
-### 9.1. Why I get 401 | Please provide valid credentials when I try to log into OpenUEM console?
+Notes for deployments carried out before December 22, 2025
+
+The previous version of this repository contained environment variables that have been replaced or renamed. Additionally, a build folder containing scripts for generating the database and NATS configuration has been removed. If you wish to update your Docker deployment, please use the following information.
+
+:::danger
+Do not delete the volume used by the Postgres container to ensure the database remains intact when updating containers. Do not use the -v option with Docker Compose to prevent the deletion of the Postgres volume.
+:::
+
+
+1) Remove the old containers. Run the following commands from the folder where your old deployment was created. 
+
+```(bash)
+docker compose down --profile openuem down
+docker compose down --profile init down
+```
+
+2) Clone the new repository
+
+```(bash)
+git clone https://github.com/open-uem/openuem-docker`
+```
+
+3) Rename the new openuem-docker repository folder to openuem. This is needed to ease the reuse of the previous Docker volumes that contain the database and the NATS streams.
+
+4) Use the file named `.env-example` file to create a `.env` file. Set the new variable values using the following table to help you migrate your old .env definitions:
+
+| Old variable name  | New variable name    |
+|--------------------|----------------------|
+| POSTGRES_PORT      | DATABASE_PORT        |
+| DATABASE_URL       | DATABASE_USER        |
+| DATABASE_URL       | DATABASE_PASSWORD    |
+| DATABASE_URL       | DATABASE_DB_NAME     |
+| ORGNAME            | OPENUEM_ORGNAME      |
+| ORGPROVINCE        | OPENUEM_ORGPROVINCE  |
+| ORGLOCALITY        | OPENUEM_ORGLOCALITY  |
+| ORGADDRESS         | OPENUEM_ORGADDRESS   |
+| COUNTRY            | OPENUEM_ORGCOUNTRY   |
+| DOMAIN             | OPENUEM_DOMAIN       |
+| AUTH_PORT          | CONSOLE_AUTH_PORT    |
+| JWT_KEY            | CONSOLE_JWT_KEY      |
+| SERVER_NAME        | CONSOLE_HOST         |
+| SERVER_NAME        | OCSP_HOST            |
+| SERVER_NAME        | NATS_HOST            |
+| NATS_SERVERS       | OPENUEM_NATS_SERVER  |
+
+The old NATS_SERVERS variable has been replaced with two variables NATS_HOST and NATS_PORT.
+
+The old OCSP variable has been replaced with two variables OCSP_HOST and OCSP_PORT.
+
+The old SERVER_NAME was used to assign the console hostname, the ocsp responder URL, and the NATS_SERVERS variable. You must specify the CONSOLE_HOST, OCSP_HOST, NATS_HOST accordingly.
+
+5) Create a certificates folder and copy the contents of the old certificates folder where your old deployment was created.
+
+6) Run `docker compose up -d` from the new folder. The new images will be pulled and the new services will be started.
+
+
+## 10. Troubleshooting and FAQ
+
+### 10.1. Why I get 401 | Please provide valid credentials when I try to log into OpenUEM console?
 
 OpenUEM requires a user's certificate to log in. That certificate must be imported in the user's browser before trying
 to log-in. You can import the certificates following [these steps](/docs/Advanced%20Topics/user-certificate)
 
-### 9.2. Why I see messages like _read certificates/console.cer: is a directory_ in docker logs?
+### 10.2. Why I see messages like _read certificates/console.cer: is a directory_ in docker logs?
 
 That means that certificates were not generated in the initial phase, most probably there's a connection issue with the
 database container or wrong credentials have been used. Database credentials must match between the `DATABASE_URL`
