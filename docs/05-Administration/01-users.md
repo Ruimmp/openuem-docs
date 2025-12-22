@@ -18,7 +18,7 @@ keywords:
 
 # 👥 Users
 
-OpenUEM allows you to add users that can log in to the console and work as administrators.
+OpenUEM allows you to add users that can log into the console and work as administrators.
 
 :::tip
 This section is only available for the Global config
@@ -43,10 +43,10 @@ You can create a new user directly by clicking on the **Add User** button and by
 You must specify if you want the user to use certificates to log in or if OpenID connect will be used.
 
 :::note
-Please, visit the [OpenID Connect](/docs/04-Console/01-intro.md#openid-connect) section to know more about how this authenticatio works
+Please, visit the [OpenID Connect](/docs/04-Console/01-intro.md#openid-connect) section to know more about how this authentication works
 :::
 
-The new user will show in the Users’ table with the state **Pending email confirmation**. An email will be sent to the user, so the email address is confirmed.
+The new user will show in the Users table with the state **Pending email confirmation**. An email will be sent to the user, so the email address is confirmed.
 
 ![Pending email confirmation](/img/console/pending_email_confirmation.png)
 

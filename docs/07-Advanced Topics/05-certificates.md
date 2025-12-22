@@ -47,7 +47,7 @@ Here's the list of certificates (and its associated private key) that you must g
 - Server Updater certificate
 - User certificate for administrator access to the console
 
-You can use OpenUEM's cert-manager tool binary to execute the following commands to generate the certificates. Substitute your CA certificate and private key with the right path for cacert and cakey params. Also change the dburl parameter according to your DB settings and set dst parameter to the path you want to store your certificates
+You can use OpenUEM's cert-manager tool binary to execute the following commands to generate the certificates. Substitute your CA certificate and private key with the right path for **cacert** and **cakey** params. Also change the **dburl** parameter according to your DB settings and set **dst** parameter to the path you want to store your certificates
 
 ### 2.1 NATS Certificate
 

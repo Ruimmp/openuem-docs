@@ -26,6 +26,18 @@ OpenUEM console has received three major features:
 - [RustDesk integration](/docs/04-Console/07-computers.md#2123-rustdesk). OpenUEM can use RustDesk to offer remote assistance. OpenUEM instructs the agents to configure RustDesk according to the admin needs. 
 - [Remote Assistance](/docs/04-Console/07-computers.md#2121-vnc) now includes some checks to inform the administrator about the possible options to offer remote assistance and check if requirements are met. 
 
+:::danger
+For those using OpenUEM with Docker (docker compose), please note that the `build/nats/generate-nats-conf.sh` file must be changed to include the new permissions for the rustdesk configuration messages.
+
+The new file can be downloaded from: [https://raw.githubusercontent.com/open-uem/openuem-docker/refs/heads/main/build/nats/generate-nats-conf.sh](https://raw.githubusercontent.com/open-uem/openuem-docker/refs/heads/main/build/nats/generate-nats-conf.sh)
+
+Once the file is replaced a new NATS container must be rebuilt using:
+
+```
+docker compose --profile openuem up --force-recreate -d --build nats-server
+```
+:::
+
 Other features and fixes: 
 
 - feat: add PDF report for computer inventory 

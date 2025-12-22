@@ -17,7 +17,7 @@ keywords:
 
 # 🏢 Using a NATS cluster
 
-OpenUEM is ready to use a NATS cluster. NATS supports running each server in clustered mode. You can cluster servers together for high volume messaging systems and resiliency and high availability. When you install the OpenUEM component you'll be asked if you want to use a cluster.
+OpenUEM is ready to use a NATS cluster. NATS supports running each server in clustered mode. You can cluster servers together for high-volume messaging systems, resiliency and high availability. When you install the OpenUEM component you'll be asked whether you want to use a cluster.
 
 :::warning
 A NATS cluster should have an odd number of servers, in this case we should set 3 or 5 servers.
