@@ -453,6 +453,51 @@ Once you create metadata, you’ll see it is available for every endpoint.
 
 ![Metadata](/img/console/metadata.png)
 
+### 2.16 NetBird
+
+[NetBird](https://netbird.io/) is an open-source, zero-trust networking platform that creates secure, peer-to-peer mesh networks using WireGuard technology to connect devices directly and securely, eliminating complex VPN gateways, firewall rules, and central servers for remote access to internal resources, home labs, or cloud infrastructure. 
+
+OpenUEM can install, setup, and perform a basic configuration for NetBird agents. You will be able to manage your NetBird agents on demand, so you can benefit from this private network solution. 
+
+To enable the NetBird integration, you must visit the settings section of your organization. There you’ll find a NetBird tab. 
+
+![NetBird Settings](/img/console/netbird_settings.png) 
+
+In this tab you must provide the following information: 
+
+- Management URL. If you use a self-hosted NetBird instance, specify the management url
+- Access Token. OpenUEM requires a token that will be used to read groups, create one-off setup keys 
+
+[NetBird](https://docs.netbird.io/manage/public-api) documentation explains how you can create a service user and an associated token 
+
+Once you add the NetBird API token, you’ll see a new NetBird tab when you visit the details of a computer. 
+
+![NetBird Tab](/img/console/netbird_1.png) 
+
+If the OpenUEM agent detects that a NetBird client is installed, you’ll see the information gathered by OpenUEM. If no NetBird client is found, you can install it from the OpenUEM console. Note that the installation is synchronous and takes time, so please wait until the installer script downloads the files. 
+
+![NetBird installed](/img/console/netbird_2.png) 
+
+If you’ve just installed the NetBird client, you should register the client on your NetBird network. You can specify the group that you want this client to be a member of. The registry action is synchronous, so you should wait for a few moments. 
+
+![NetBird register](/img/console/netbird_3.png) 
+
+If the NetBird client is successfully registered, you should see information gathered from the OpenUEM agent showing that the NetBird client is connected to your network. 
+
+![NetBird connected](/img/console/netbird_4.png) 
+
+There are more NetBird actions that you can execute from the console: 
+
+- NetBird Up. This command should establish a connection. If the NetBird client is not registered, a browser window may open to the user, so she can authenticate. 
+- Netbird Down. This command should tear down the NetBird connection.  
+- Delete a peer. You can delete the peer from NetBird if an IP address is shown as that address will be used to identify the NetBird peer using the API.  
+- Uninstall NetBird. The OpenUEM agent will try to uninstall the agent either using winget or by using an uninstall script. It’ll also try to delete the peer, so it’s recommended to run the uninstall command if an IP address is shown in the information section. 
+- Switch to a profile. NetBird can use local profiles that should be created by the user on the remote endpoint (OpenUEM cannot create these profiles). You can switch to one of those profiles from OpenUEM console but note that if the user hadn’t used that profile before, a browser window may open to the user, so she can authenticate. 
+
+If you need to install and/or register NetBird clients in many endpoints, you can create OpenUEM tasks in a profile that can perform those actions: 
+
+![NetBird Tasks](/img/console/netbird_5.png) 
+
 ## 3. PDF/CSV Report
 
 You can generate a PDF/CSV report that lists your computers and preserves your filters and sorting using the PDF/CSV buttons in the section header.

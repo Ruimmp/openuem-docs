@@ -62,7 +62,7 @@ If you use Docker, you can use the analogous environment variables:
 From version 0.11.0 onwards you can use a username and a password to authenticate. 
 
 :::important
-OpenUEM will create automatically the openuem user and generate a temporary password that will show in the console logs. 
+OpenUEM will create automatically the openuem user and generate a temporary password that will show in the console logs (try to look for the initial password text in the log). 
 
 If you cannot find the password or have forgotten it, you can regenerate the password using one of the following methods: 
 

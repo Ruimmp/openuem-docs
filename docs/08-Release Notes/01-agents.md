@@ -16,6 +16,29 @@ keywords:
 
 # Agents
 
+## 0.10.0 
+
+Released: 22/12/2025
+
+Full list of changes:
+
+- fix: back up RustDesk.toml before OpenUEM connects
+- fix: remove zenity timeout
+- feat: retrieve Windows domain info
+- feat: more descriptive name for Linux apps
+- fix: history time parse,APT and KDE unattended
+- fix: apply optional RustDesk config in Windows no matter directIPAccess
+- fix: Linux agent now detects virtual network interfaces
+- feat: dnf automatic and fix time parse in location
+- fix: detect the nic used to reach default gw in Linux
+- feat: add support to Silverblue and Kinoite fedora
+- feat: support for NetBird
+- fix: add exceptions to detect logged in user in KDE Neon and Fedora
+- feat: support for verification method and temporary password length
+- feat: pass --management-url to every Netbird action
+- feat: ping action to check if agent is online
+    
+
 ## 0.9.0
 
 Released: 01/11/2025
