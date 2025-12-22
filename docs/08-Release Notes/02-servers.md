@@ -16,6 +16,39 @@ keywords:
 
 # Server
 
+## 0.11.0
+
+Released: 22/12/2025
+
+These are the three major changes: 
+
+- [Authentication with username and password](/docs/Console/intro#username-and-password)
+- [Netbird integration](/docs/Console/computers#216-netbird)  
+- [Changes to the Docker compose](/docs/Installation/Server/docker). mpweya did some changes to the docker compose file so it's easier to deploy OpenUEM with docker and even with podman.
+
+:::danger
+For those using OpenUEM with Docker (docker compose), please note that as the docker compose has changed you should have a look to the [Legacy section](/docs/Installation/Server/docker#9-legacy-docker-compose) that explains how you can migrate your old configuration
+:::
+
+This is the full list of changes:
+
+- feat: add new translations in Catalan and French by @carlesgs
+- fix: detects wrong unix local user/group task and checked force item
+- feat: show domain info for Windows agents
+- feat: more icons for Linux apps
+- feat: add virtual interfaces and pagination
+- feat: support for NetBird
+- feat: SFTP will use netbird connection if available
+- fix: profiles icon should be visible no matter if no site is selected
+- fix: add IP to rustdesk connect links
+- feat: add self-hosted server and key to RustDesk URI if available
+- feat: add verification method and temporary password length to rustdesk
+- fix: profile issues pagination url
+- feat: pass NetBird management url in every action
+- feat: show if agent is online in computer's view
+- feat: add traditional user and password auth
+- fix: change redirects when reverse proxy
+
 ## 0.10.0
 
 Released: 01/11/2025

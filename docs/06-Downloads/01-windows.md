@@ -28,13 +28,13 @@ You can download OpenUEM agent and server for Windows from OpenUEM's download si
 
 | Type  | Version | Arch  | Link                                                                                        | Checksum                                                                 |
 | ----- | ------- | ----- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Agent | 0.9.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.9.0/windows/amd64/openuem-agent-setup.exe) | SHA256: 3796E6D2A3C388919EE07DF41956854B8256DC57DCD671007F88FDFF18BC46E4 |
+| Agent | 0.10.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.10.0/windows/amd64/openuem-agent-setup.exe) | SHA256: DC66842B32C888D066C3190E28DE3A5944855D7D73F457F6AD3F00AC57CD770D |
 
 ## 🖥 Server (latest version)
 
 | Type   | Version | Arch  | Link                                                                            | Checksum                                                                 |
 | ------ | ------- | ----- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Server | 0.10.0   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.10.0.exe) | SHA256: E4838156F59548C883E939254AF2939C8FE79E798C30B9E02FFA72BF8E4BAF92 |
+| Server | 0.11.0   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.11.0.exe) | SHA256: EFE16E425BCEFE7620DC64D0C9DD10FAFB119434671750EE2BCBCF8783421A21 |
 
 :::warning
 As OpenUEM is a new project, Microsoft Edge and/or Microsoft SmartScreen can warn you that the file to be downloaded cannot be trusted by Microsoft as it's a file that is not downloaded commonly and you'll have to force the browser to keep that file to download it or force SmartScreen to allow execution. Hopefully, soon, this warning will disappear as a report has been sent to Microsoft.
@@ -46,6 +46,7 @@ As OpenUEM is a new project, Microsoft Edge and/or Microsoft SmartScreen can war
 
 | Type  | Version | Arch  | Link                                                                                        | Checksum                                                                 |
 | ----- | ------- | ----- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Agent | 0.9.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.9.0/windows/amd64/openuem-agent-setup.exe) | SHA256: 3796E6D2A3C388919EE07DF41956854B8256DC57DCD671007F88FDFF18BC46E4 |
 | Agent | 0.8.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.8.0/windows/amd64/openuem-agent-setup.exe) | SHA256: 06AA41799D286F74D21E9EEA926980A4A246698E32808A229ADAD6862A3B5DDD |
 | Agent | 0.7.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.7.0/windows/amd64/openuem-agent-setup.exe) | SHA256: 13D43AC00D9EF26BDC1BAA21AB12BE4155A9CCB5B5A4A114D5D5CC36E1258760 |
 | Agent | 0.6.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.6.0/windows/amd64/openuem-agent-setup.exe) | SHA256: 3BFF3C353672D61C9C554E2BFC159CA09DE3E1AB6E525B24952F9BCF44A3FB5F |
@@ -61,6 +62,7 @@ As OpenUEM is a new project, Microsoft Edge and/or Microsoft SmartScreen can war
 
 | Type   | Version | Arch  | Link                                                                            | Checksum                                                                 |
 | ------ | ------- | ----- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Server | 0.10.0   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.10.0.exe) | SHA256: E4838156F59548C883E939254AF2939C8FE79E798C30B9E02FFA72BF8E4BAF92 |
 | Server | 0.9.0   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.9.0.exe) | SHA256: E8366DD29EBF78A3E6B853567F527ED248D6C24346A540D03330639D0232A5B7 |
 | Server | 0.8.0   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.8.0.exe) | SHA256: 307BDD5411255BBE2E840E999DF3CA17DBA4D2EEF041335EDEFECA59F64E1B72 |
 | Server | 0.7.1   | amd64 | [Download](https://downloads.openuem.eu/servers/openuem-server-setup-0.7.1.exe) | SHA256: E1B5145F2F697EDB6AE4E37138C3E5F358A820CB12AF16720C89391DB82DFFCE |
