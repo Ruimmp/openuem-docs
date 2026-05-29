@@ -16,6 +16,22 @@ keywords:
 
 # Agents
 
+## 0.11.0 
+
+Released: 11/03/2026
+
+Full list of changes:
+
+- fix: alternative way to get username logged in for RDP connections
+- fix: omit loop devices for physical disk info
+- fix: provide more info when a powershell task fails
+- feat: the agent now accepts RustDesk connection attemps if no user logged in
+- feat: detect Tahoe macOS version
+- feat: improve reports for tasks and package deployment
+- fix: parse Ansible result form macOS even if it fails
+- feat: websockets
+- fix: set task as successful if stderr is empty
+
 ## 0.10.0 
 
 Released: 22/12/2025
@@ -36,8 +52,7 @@ Full list of changes:
 - fix: add exceptions to detect logged in user in KDE Neon and Fedora
 - feat: support for verification method and temporary password length
 - feat: pass --management-url to every Netbird action
-- feat: ping action to check if agent is online
-    
+- feat: ping action to check if agent is online  
 
 ## 0.9.0
 

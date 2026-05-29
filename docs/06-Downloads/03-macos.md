@@ -24,19 +24,23 @@ You can download [OpenUEM agent](https://downloads.openuem.eu/agents/) for MacOS
 
 [![Download OpenUEM](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/openuem/files/latest/download)
 
+You can download them from GitHub Releases too: https://github.com/open-uem/openuem-agent/releases
+
 ARM64 packages are used for Apple Silicon endpoints while AMD64 packages are used for Intel endpoints
 
 ## 🕵 Agent (latest version)
 
 | Type  | Version | Arch  | Link                                                                                | Checksum                                                                 |
 | ----- | ------- | ----- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Agent | 0.10.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.10.0/macos/amd64/openuem-agent.pkg) | SHA256: 31130D34D978CE5B062FB90716FBBBFF7859540A3EC5499A5EDC5DB40D22A1B7 |
-| Agent | 0.10.0   | arm64 | [Download](https://downloads.openuem.eu/agents/0.10.0/macos/arm64/openuem-agent.pkg) | SHA256: D0AA01B34FE8DCFE7D5E553CED8FCDBBFC4B84A01D53B4ACF0F129CC706D0F20 |
+| Agent | 0.11.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.11.0/macos/amd64/openuem-agent.pkg) | SHA256: CC5B51418F07F4F38AA8ED698EC019C6DC422A1A038AC71B9F212A522E76C87F |
+| Agent | 0.11.0   | arm64 | [Download](https://downloads.openuem.eu/agents/0.11.0/macos/arm64/openuem-agent.pkg) | SHA256: 56F0C72C4589553D8E04D6A0E77210D031234AF08B8C28383AD184F9D6E23D6C |
 
 ## Previous versions
 
 | Type  | Version | Arch  | Link                                                                                | Checksum                                                                 |
 | ----- | ------- | ----- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Agent | 0.10.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.10.0/macos/amd64/openuem-agent.pkg) | SHA256: 31130D34D978CE5B062FB90716FBBBFF7859540A3EC5499A5EDC5DB40D22A1B7 |
+| Agent | 0.10.0   | arm64 | [Download](https://downloads.openuem.eu/agents/0.10.0/macos/arm64/openuem-agent.pkg) | SHA256: D0AA01B34FE8DCFE7D5E553CED8FCDBBFC4B84A01D53B4ACF0F129CC706D0F20 |
 | Agent | 0.9.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.9.0/macos/amd64/openuem-agent.pkg) | SHA256: BEDAF7A58899C79A4B76F349AEE408A9917ABA5FCD5A402CE12548D5EAB8624A |
 | Agent | 0.9.0   | arm64 | [Download](https://downloads.openuem.eu/agents/0.9.0/macos/arm64/openuem-agent.pkg) | SHA256: 1E19502D49D748D971061F358ED579D98D1530BFBAA764A136A0636C777B9616 |
 | Agent | 0.8.0   | amd64 | [Download](https://downloads.openuem.eu/agents/0.8.0/macos/amd64/openuem-agent.pkg) | SHA256: 8571F281675A4D6F07232319C6D528F4760CE90F6EEC65220050D7E46D1E879B |

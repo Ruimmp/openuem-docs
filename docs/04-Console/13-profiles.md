@@ -80,7 +80,15 @@ In the profiles view you’ll see if some errors were found with a warning sign.
 
 If you click on that warning sign, you’ll open a new table showing the endpoints that found problems applying the profile and the error messages next to the task’s type.
 
-![Profiles, error detail](/img/console/profiles_error_detail.png)
+![Profiles, error detail](/img/console/new_profile1.png)
+
+If you're using agents >= 0.11.0 and server >= 0.12.0 you'll get a detailed view about the profile run:
+
+![Profiles, more detail](/img/console/new_profile2.png)
+
+Also, you'll be able to see more information about tasks execution:
+
+![Task, more detail](/img/console/new_profile3.png)
 
 ## Notes about tasks
 
@@ -91,3 +99,9 @@ If you want to install or uninstall an MSI file using WinGet, you’ll need to s
 ### 2. Execute PowerShell scripts
 
 When you add a task to execute a PowerShell script **you can choose between running the script only once or running it every time the endpoint applies the profile**. If you choose to **run the script once** an entry will be created in the agent’s config file **if the script was successfully executed**, if not **it will run again the next time the profile is applied**.
+
+## Notes about profiles
+
+### Max profile running duration
+
+A profile from the start of it's first task to the ending of it's last task must be constrained within a 24h timeframe or it's execution will be aborted. This is designed to prevent profiles that unexpectedly stopped to remain stale even when modified.

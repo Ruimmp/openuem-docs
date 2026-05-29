@@ -29,11 +29,11 @@ Visit the [Downloads section](/docs/06-Downloads/01-windows.md) and choose the d
 Download your preferred version and note that you can check if the checksum matches using Powershell's Get-FileHash:
 
 ```(powershell)
-Get-FileHash openuem-server-setup-0.10.0.exe
+Get-FileHash openuem-server-setup-0.12.0.exe
 
 Algorithm       Hash                                                                   Path
 ---------       ----                                                                   ----
-SHA256          E4838156F59548C883E939254AF2939C8FE79E798C30B9E02FFA72BF8E4BAF92       C:\Users\doncicuto\Downloads\openuem....
+SHA256          18587C61437F3A3679AA1BBC14C1CE74986CCBCB36B003B78A12F2DBB831E27F       C:\Users\doncicuto\Downloads\openuem....
 ```
 
 ## 2. Install OpenUEM server
@@ -219,11 +219,7 @@ Now open `https://SERVER_NAME:CONSOLE_PORT` (replace the values that you've set 
 
 ![Console LogIn](/img/console/login.png)
 
-Finally, log in user your admin certificate and read how to install and add your first agent.
-
-:::note
-If you see any certificates error, OpenUEM should have imported the digital certificates in the right certificate stores of your browser automatically, but if it hadn't been the case, you can import the certificates by yourself
-:::
+Finally, [log in to the console](/docs/04-Console/01-intro.md)
 
 ### 3.1 Services
 
