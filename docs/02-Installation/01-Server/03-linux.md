@@ -516,11 +516,7 @@ Now open `https://SERVER_NAME:CONSOLE_PORT` (replace the values that you've set 
 
 ![Console LogIn](/img/console/login.png)
 
-Finally, log in user your admin certificate and read how to install and add your first agent.
-
-:::note
-If you see any certificates error, OpenUEM should have imported the digital certificates in the right certificate stores of your browser automatically, but if it hadn't been the case, you can import the certificates by yourself
-:::
+Finally, [log in to the console](/docs/04-Console/01-intro.md)
 
 #### 3.1 Services
 

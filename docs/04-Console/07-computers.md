@@ -498,6 +498,18 @@ If you need to install and/or register NetBird clients in many endpoints, you ca
 
 ![NetBird Tasks](/img/console/netbird_5.png) 
 
+### 2.17 Tasks
+
+In OpenUEM 0.12.0, if your endpoint is running at least version 0.11.0, you should see a new tab called "Tasks."
+
+On this tab, you'll see reports of the tasks executed on that endpoint. You should see whether the task executed successfully, as well as the standard error and standard output, if reported. You can rerun a task immediately if the agent is online by clicking the play button.
+
+![Tasks](/img/console/tasks_tab_1.png) 
+
+If desired, you can run a task or profile that can be applied to that endpoint by selecting it from the dropdown menus. This way, you don't have to wait the default 30 minutes for the agent to check if the profiles should be applied.
+
+![Task menu](/img/console/tasks_tab_2.png) 
+
 ## 3. PDF/CSV Report
 
 You can generate a PDF/CSV report that lists your computers and preserves your filters and sorting using the PDF/CSV buttons in the section header.

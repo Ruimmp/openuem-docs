@@ -16,6 +16,27 @@ keywords:
 
 # Server
 
+## 0.12.0
+
+Released: 11/03/2026
+
+In this version, the most important change is the improved profiles and task reports, and [the new Task tab](/docs/Console/computers#217-tasks)
+
+This is the full list of changes:
+
+- feat: add support for better task and deployment reporting
+- feat: new setting for the minimum number of items that will be displayed per page
+- feat: add search filter to computer, software and EDR views
+- feat: profiles can enabled or disabled
+- feat: adding Norwegian translation
+- fix: allow RustDesk connection if no user is logged in
+- fix: use tenant and site for rustdesk start and stop url
+- fix: redirect URI for login, logout and OIDC
+- fix: if in Docker and a new release, icon is not a button
+- fix: refresh should honor paging, sorting and filtering
+- fix: pass filter by source in package deployment
+- fix: use semver to sort releases
+
 ## 0.11.0
 
 Released: 22/12/2025

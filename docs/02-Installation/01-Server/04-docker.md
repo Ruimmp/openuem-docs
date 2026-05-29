@@ -78,6 +78,8 @@ The variables prefixed with `DATABASE` are used to create a Postgres connection 
 | REVERSE_PROXY_AUTH_PORT    | If you want to use a reverse proxy, set the port that will be used to answer for auth, **use an empty value otherwise**             | yes      | 4443 or **use an empty value otherwise**                          |
 | NATS_HOST                  | The domain name used by the NATS server                                                                                             | yes      | nats.openuem.example                                              |
 | NATS_PORT                  | The port used by the NATS server                                                                                                    | yes      | 4433                                                              |
+| NATS_DEBUG | If you want to enable debug for the NATS server | no | true or false |
+| NATS_WEBSOCKET_PORT | If you want to enable websocket support for the NATS server | no | 8888 |
 | OCSP_URL                   | The URL for the OCSP responder service                                                                                              | yes      | http://ocsp.openuem.example:8000                                  |
 | OCSP_HOST                  | The host domain for the OCSP responder service                                                                                      | yes      | ocsp.openuem.example                                              |
 | OCSP_PORT                  | The port used by the OCSP responder                                                                                                 | yes      | 8000                                                              |
@@ -113,32 +115,38 @@ You can run OpenUEM behind a reverse proxy. Caddy can be used and is supported f
 If you decide to use Caddy as a reverse proxy, set the variables prefixed `REVERSE_PROXY` in the `.env` file (see the
 table above). Remember that the hosts / domains you set have to be resolvable by a DNS.
 
-## 4. Launch docker compose command
+## 4. Launch docker compose command to create the database and generate the certificates
 
-Where the `compose.yaml` file and the .env files are located, launch OpenUEM with the following commands:
+Where the `compose.yaml` file and the .env files are located, execute the following command:
+
+```bash
+docker compose up openuem-certs -d
+```
+This command will create the database service and generate all the certificates required by OpenUEM in the certificates folder:
+
+![Certificates folder](/img/docker/certificates_folder.png)
+
+:::warning
+The generation of certificates can take some time, don't stop the containers or go to the next step until you check that certificates have been indeed created. If you find two files under the `agents` folder and one `.pfx` file inside the `users` folder, you're good to go.
+:::
+
+## 5. Launch docker compose again, to create the remaining services
+
+Once you've checked that the certificates have been generated, run the following commands to launch the remaining services: 
 
 Without Caddy support:
 
 ```bash
 # Docker Compose:
-docker compose up -d --build 
+docker compose up -d
 ```
 
 With Caddy support:
 
 ```bash
 # Docker Compose:
-docker compose -f compose-caddy.yml up -d --build
+docker compose -f compose-caddy.yml up -d
 ```
-
-On first start all the certificates are generated in the certificates folder:
-
-![Certificates folder](/img/docker/certificates_folder.png)
-
-:::warning
-The generation of certificates can take some time, don't stop the containers or go to the next step until you check that
-certificates have been indeed created. This should be automatically done when the `... compose up ...` command finishes.
-If you find two files under the `agents` folder and one `.pfx` file inside the `users` folder, you're good to go.
  
 If you find any error trying to launch the services, run the `docker compose down` or `podman compose down` commands shown below, **remove the
 volumes and the certificates folder** and start again
@@ -158,6 +166,8 @@ docker compose -f compose-caddy.yml down
 sudo rm -rf certificates
 docker volume rm openuem_jetstream openuem_pgdata openuem_caddy_config openuem_caddy_data
 ```
+
+You can use `docker compose logs -f` to view the output from OpenUEM containers.
 
 Open an issue with all the possible information if you can't start OpenUEM with Docker
 :::
@@ -198,26 +208,11 @@ If you've set a reverse proxy the url should be `https://REVERSE_PROXY_HOST:REVE
 
 ![Console LogIn](/img/console/login.png)
 
-Finally, log in user your admin certificate and read how to install and add your first agent.
-
-:::note
-If you see any certificates error, please ensure that you've imported the right certificates in the right certificate
-stores of your browser
-:::
+Finally, [log in to the console](/docs/04-Console/01-intro.md)
 
 ## 8. Update
 
-To update the Docker containers, use docker compose without the Caddy option:
-
-```(bash)
-docker compose up --force-recreate -d --build --pull
-```
-
-And if you use the Caddy option:
-
-```(bash)
-docker compose up --force-recreate -d  --pull
-```
+To update the Docker containers, use `--force-recreate` as the openuem-cert-manager image may need to replace the nats.conf file to include new authorizations for the NATS server
 
 ## 9. Legacy docker compose
 
@@ -233,14 +228,14 @@ Do not delete the volume used by the Postgres container to ensure the database r
 1) Remove the old containers. Run the following commands from the folder where your old deployment was created. 
 
 ```(bash)
-docker compose down --profile openuem down
-docker compose down --profile init down
+docker compose --profile openuem down
+docker compose --profile init down
 ```
 
 2) Clone the new repository
 
 ```(bash)
-git clone https://github.com/open-uem/openuem-docker`
+git clone https://github.com/open-uem/openuem-docker
 ```
 
 3) Rename the new openuem-docker repository folder to openuem. This is needed to ease the reuse of the previous Docker volumes that contain the database and the NATS streams.
